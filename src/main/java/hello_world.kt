@@ -1,5 +1,7 @@
+import handler.GetHandler
+import model.Model
 import spark.Spark.*
 
-fun main(args: Array<String>) {
-    get("/hello") { req, res -> "Hello World" }
+fun main() {
+    get("/hello", GetHandler(Model()))
 }
