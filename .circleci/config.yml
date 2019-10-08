@@ -64,6 +64,9 @@ jobs:
             docker run -d --name my-app my-app
             docker run --network container:my-app appropriate/curl --retry 10 --retry-connrefused http://localhost:4567/hello
       - run:
+          name: Install ruby
+          command: sudo apt-get update && apt-get install -y rubygems && gem install bundler
+      - run:
           name: Should functional test here
           command: bundle install && bundle exec cucumber
       - run:
@@ -72,9 +75,6 @@ jobs:
       - run:
           name: Setup Heroku
           command: chmod +x .circleci/setup-heroku.sh
-      - run:
-          name: Install ruby
-          command: sudo apt-get update && apt-get install -y ruby && apt-get install -y ruby
       - run:
           name: setting up heroku container
           command: .circleci/setup-heroku.sh
