@@ -99,7 +99,7 @@ jobs:
           command: nohup java -jar build/libs/idonethis-backend-1.0-SNAPSHOT.jar &
       - run:
           name: blah
-          command: curl http://idonethis-backend/hello
+          command: curl https://idonethis-backend.herokuapp.com/hello
       - run:
           name: Install ruby
           command: sudo apt-get update && sudo apt-get install -y rubygems && sudo apt-get install -y ruby-dev && sudo gem install bundler
