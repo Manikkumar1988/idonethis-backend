@@ -68,17 +68,17 @@ jobs:
             curl -L -o /tmp/docker-$VER.tgz https://download.docker.com/linux/static/stable/x86_64/docker-$VER.tgz
             tar -xz -C /tmp -f /tmp/docker-$VER.tgz
             sudo mv /tmp/docker/* /usr/bin
-#      - run:
-#          name: Buidling docker
-#          command: docker build -t my-app .
-#      - run:
-#          name: "Start Service and Check Thats it Running"
-#          command: |
-#            docker run -d --name my-app my-app
-#            docker run --network container:my-app appropriate/curl --retry 10 --retry-connrefused http://localhost:4567/hello
-#      - run:
-#          name: blah
-#          command: curl http://localhost:4567/hello
+      - run:
+          name: Buidling docker
+          command: docker build -t my-app .
+      - run:
+          name: "Start Service and Check Thats it Running"
+          command: |
+            docker run -d --name my-app my-app
+            docker run  -p 4567:4567 --network container:my-app appropriate/curl --retry 10 --retry-connrefused http://localhost:4567/hello
+      - run:
+          name: blah
+          command: curl http://localhost:4567/hello
       - run:
           name: Login to heroku ecr
           command: docker login -username=$HEROKU_USERNAME --password=$HEROKU_API_KEY registry.heroku.com
@@ -94,9 +94,6 @@ jobs:
       - run:
           name: Deploy to Heroku
           command: heroku container:release web --app $HEROKU_APP_NAME_ONE
-      - run:
-          name: launching the server
-          command: nohup java -jar build/libs/idonethis-backend-1.0-SNAPSHOT.jar &
       - run:
           name: blah
           command: curl https://idonethis-backend.herokuapp.com/hello
