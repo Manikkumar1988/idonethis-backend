@@ -65,7 +65,7 @@ jobs:
 #            docker run --network container:my-app appropriate/curl --retry 10 --retry-connrefused http://localhost:4567/hello
       - run:
           name: Install ruby
-          command: sudo apt-get update && sudo apt-get install -y rubygems && gem install bundler
+          command: sudo apt-get update && sudo apt-get install -y rubygems && sudo gem install bundler
       - run:
           name: Should functional test here
           command: bundle install && bundle exec cucumber
