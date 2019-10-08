@@ -39,7 +39,7 @@ jobs:
           key: v1-dependencies-{{ checksum "build.gradle" }}
 
       # run tests!
-      - run: ./gradlew test
+#      - run: ./gradlew test
 
       - run: ./gradlew build
       - setup_remote_docker:   # (2)
@@ -62,7 +62,7 @@ jobs:
           name: "Start Service and Check Thats it Running"
           command: |
             docker run -d --name my-app my-app
-            docker --network container:my-app appropriate/curl --retry 10 --retry-connrefused http://localhost:4567/hello
+            docker run --network container:my-app appropriate/curl --retry 10 --retry-connrefused http://localhost:4567/hello
       - run:
           name: Should functional test here
           command: echo "hello"
