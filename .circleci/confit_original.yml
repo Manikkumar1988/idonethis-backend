@@ -73,9 +73,6 @@ jobs:
           name: Setup Heroku
           command: chmod +x .circleci/setup-heroku.sh
       - run:
-          name: Install ruby
-          command: sudo apt-get update && apt-get install -y ruby && apt-get install -y ruby
-      - run:
           name: setting up heroku container
           command: .circleci/setup-heroku.sh
       - run:
