@@ -40,32 +40,32 @@ jobs:
 
       # run tests!
 #      - run: ./gradlew test
-
-      - run: ./gradlew build
-      - setup_remote_docker:   # (2)
-          docker_layer_caching: true # (3)
-
-      # use a primary image that already has Docker (recommended)
-      # or install it during a build like we do here
-      - run:
-          name: Install Docker client
-          command: |
-            set -x
-            VER="17.03.0-ce"
-            curl -L -o /tmp/docker-$VER.tgz https://download.docker.com/linux/static/stable/x86_64/docker-$VER.tgz
-            tar -xz -C /tmp -f /tmp/docker-$VER.tgz
-            sudo mv /tmp/docker/* /usr/bin
-      - run:
-          name: Buidling docker
-          command: docker build -t my-app .
-      - run:
-          name: "Start Service and Check Thats it Running"
-          command: |
-            docker run -d --name my-app my-app
-            docker run --network container:my-app appropriate/curl --retry 10 --retry-connrefused http://localhost:4567/hello
+#
+#      - run: ./gradlew build
+#      - setup_remote_docker:   # (2)
+#          docker_layer_caching: true # (3)
+#
+#      # use a primary image that already has Docker (recommended)
+#      # or install it during a build like we do here
+#      - run:
+#          name: Install Docker client
+#          command: |
+#            set -x
+#            VER="17.03.0-ce"
+#            curl -L -o /tmp/docker-$VER.tgz https://download.docker.com/linux/static/stable/x86_64/docker-$VER.tgz
+#            tar -xz -C /tmp -f /tmp/docker-$VER.tgz
+#            sudo mv /tmp/docker/* /usr/bin
+#      - run:
+#          name: Buidling docker
+#          command: docker build -t my-app .
+#      - run:
+#          name: "Start Service and Check Thats it Running"
+#          command: |
+#            docker run -d --name my-app my-app
+#            docker run --network container:my-app appropriate/curl --retry 10 --retry-connrefused http://localhost:4567/hello
       - run:
           name: Install ruby
-          command: sudo apt-get update && apt-get install -y rubygems && gem install bundler
+          command: sudo apt-get update && sudo apt-get install -y rubygems && gem install bundler
       - run:
           name: Should functional test here
           command: bundle install && bundle exec cucumber
