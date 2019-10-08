@@ -58,11 +58,11 @@ jobs:
       - run:
           name: Buidling docker
           command: docker build -t my-app .
-#      - run:
-#          name: "Start Service and Check Thats it Running"
-#          command: |
-#            docker run -d --name my-app my-app
-#            docker exec my-app curl --retry 10 --retry-connrefused http://localhost:4567/hello
+      - run:
+          name: "Start Service and Check Thats it Running"
+          command: |
+            docker run -d --name my-app my-app
+            docker --network container:my-app appropriate/curl --retry 10 --retry-connrefused http://localhost:4567/hello
       - run:
           name: Should functional test here
           command: echo "hello"
