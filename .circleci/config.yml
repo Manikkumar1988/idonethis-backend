@@ -45,7 +45,7 @@ jobs:
       - run: ls
       - run:
           name: launching the server
-          command: java -jar build/libs/idonethis-backend-1.0-SNAPSHOT.jar
+          command: nohup java -jar build/libs/idonethis-backend-1.0-SNAPSHOT.jar &
       - run:
           name: Install ruby
           command: sudo apt-get update && sudo apt-get install -y rubygems && sudo apt-get install -y ruby-dev && sudo gem install bundler
