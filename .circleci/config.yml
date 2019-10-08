@@ -39,9 +39,10 @@ jobs:
           key: v1-dependencies-{{ checksum "build.gradle" }}
 
       # run tests!
-      - run: ./gradlew test
+#      - run: ./gradlew test
 
       - run: ./gradlew build
+      - run: ls
       - run:
           name: launching the server
           command: java -jar /build/libs/idonethis-backend-1.0-SNAPSHOT.jar
