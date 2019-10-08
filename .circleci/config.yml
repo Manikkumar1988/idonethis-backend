@@ -39,13 +39,13 @@ jobs:
           key: v1-dependencies-{{ checksum "build.gradle" }}
 
       # run tests!
-#      - run: ./gradlew test
+      - run: ./gradlew test
 
       - run: ./gradlew build
       - run: ls
       - run:
           name: launching the server
-          command: java -jar /build/libs/idonethis-backend-1.0-SNAPSHOT.jar
+          command: java -jar build/libs/idonethis-backend-1.0-SNAPSHOT.jar
       - run:
           name: Install ruby
           command: sudo apt-get update && sudo apt-get install -y rubygems && sudo apt-get install -y ruby-dev && sudo gem install bundler
@@ -69,11 +69,11 @@ jobs:
       - run:
           name: Buidling docker
           command: docker build -t my-app .
-      - run:
-          name: "Start Service and Check Thats it Running"
-          command: |
-            docker run -d --name my-app my-app
-            docker run --network container:my-app appropriate/curl --retry 10 --retry-connrefused http://localhost:4567/hello
+#      - run:
+#          name: "Start Service and Check Thats it Running"
+#          command: |
+#            docker run -d --name my-app my-app
+#            docker run --network container:my-app appropriate/curl --retry 10 --retry-connrefused http://localhost:4567/hello
       - run:
           name: Login to heroku ecr
           command: docker login -username=$HEROKU_USERNAME --password=$HEROKU_API_KEY registry.heroku.com
