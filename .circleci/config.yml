@@ -62,7 +62,7 @@ jobs:
           name: "Start Service and Check Thats it Running"
           command: |
             docker run -d --name my-app my-app
-            docker exec my-app curl --retry 10 --retry-connrefused http://localhost:8080
+            docker exec my-app curl --retry 10 --retry-connrefused http://localhost:4567/hello
       - run:
           name: Should functional test here
           command: echo "hello"
