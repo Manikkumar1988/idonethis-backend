@@ -1,0 +1,5 @@
+/.gradle
+/.idea
+/build
+!/build/libs/idonethis-backend-1.0-SNAPSHOT.jar
+.gitignore
