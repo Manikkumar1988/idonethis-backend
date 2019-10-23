@@ -23,7 +23,7 @@ abstract class AbstractRequestHandler<V : Validable>(private val valueClass: Cla
     @Throws(Exception::class)
     override fun handle(request: Request, response: Response): Any? {
         val objectMapper = ObjectMapper()
-        val unparsedBody: String = if(response.body().isBlank() || response.body().isEmpty()) "{}"
+        val unparsedBody: String = if(response.body().isNullOrBlank() || response.body().isNotEmpty()) "{}"
         else
             response.body()
         val value = objectMapper.readValue(unparsedBody, valueClass)
