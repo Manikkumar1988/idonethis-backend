@@ -12,6 +12,6 @@ class GetHandlerTest {
     fun `should return Hello World`() {
         val getHandler = GetHandler(Model())
 
-        assertEquals(Answer(200,"Hello World"), getHandler.process(EmptyPayload(), Collections.emptyMap(), false))
+        assertEquals(Answer(200,"Hello World"), getHandler.process(EmptyPayload(), Collections.emptyMap()))
     }
 }
