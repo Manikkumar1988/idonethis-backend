@@ -94,12 +94,9 @@ jobs:
       - run:
           name: Deploy to Heroku
           command: heroku container:release web --app $HEROKU_APP_NAME_ONE
-#      - run:
-#          name: blah
-#          command: curl https://idonethis-backend.herokuapp.com/hello
       - run:
           name: Install ruby
           command: sudo apt-get update && sudo apt-get install -y rubygems && sudo apt-get install -y ruby-dev && sudo gem install bundler
       - run:
           name: Should functional test here
-          command: bundle install && bundle exec cucumber
+          command: bundle install && bundle exec cucumber TEST_ENV=https://idonethis-backend.herokuapp.com
