@@ -14,7 +14,15 @@ end
 Then("I should be able to add a to_do item") do
     data = File.read("input.txt")
     parsed = JSON.parse(data)
-    response = RestClient.post "#{$BASE_URL}/user/#{parsed["uid"]}/item",{item:"task A", type:0} , {content_type: :json, accept: :json}
+
+    payload = """
+      {
+        \"item\" : \"task A\",
+        \"type\" : \"0\"
+      }
+      """
+
+    response = RestClient.post "#{$BASE_URL}/user/#{parsed["uid"]}/item", payload , {content_type: :json, accept: :json}
     expect(response.code).to eq(200)
-    expect(response.body).to eq("")
+    expect(response.body).to eq("{\"code\":200,\"body\":\"Success\"}")
 end

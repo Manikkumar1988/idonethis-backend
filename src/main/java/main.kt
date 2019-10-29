@@ -1,5 +1,6 @@
 import handler.GetHandler
 import handler.LoginHandler
+import handler.ToDoHandler
 import model.Model
 import model.Sql2OModel
 import spark.Spark.before
@@ -14,12 +15,13 @@ fun main() {
 
     val model: Model = Sql2OModel(db.sql2o)
 
+    before("/*") { q, _ -> println("Received api call: ${q.url()}") }
     get("/hello", GetHandler(model))
     get("/alive") { _, _ -> "ok" }
     get("/dbcheck") { _, _ -> db.getAllUsers() }
 
     get("/user", LoginHandler(model))
-    post("/user/:uid/item") { _, _ -> Answer.ok("To Be Implemented")}
+    post("/user/:uid/item", ToDoHandler(model))
 }
 
 fun getHerokuAssignedPort(): Int {
