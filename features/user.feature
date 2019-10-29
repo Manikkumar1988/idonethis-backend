@@ -2,6 +2,6 @@
 
 Feature: User
 
-  Scenario: Register
-    When I register using valid username and password
-    Then I should be able to login with same username and password
+  Scenario: Login
+    When I login valid username and password
+    Then I should be able to add a to_do item
