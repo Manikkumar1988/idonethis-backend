@@ -1,10 +1,10 @@
-import model.User
+import handler.User
 import org.sql2o.Sql2o
 import java.net.URI
 import org.flywaydb.core.Flyway
 
 class DB {
-    private lateinit var sql2o: Sql2o
+    lateinit var sql2o: Sql2o
 
     fun start() {
         val dbUri: URI = if (System.getenv("DATABASE_URL") == null) {

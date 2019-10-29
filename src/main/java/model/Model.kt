@@ -1,7 +1,8 @@
 package model
 
-import java.util.UUID
-import java.util.Optional
+import handler.User
 
 
-class Model
+interface Model {
+    fun login(user: User): MutableList<User>
+}
