@@ -23,7 +23,6 @@ repositories {
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
     implementation "com.sparkjava:spark-core:2.3"
-    implementation "com.fasterxml.jackson.module:jackson-module-kotlin:2.9.10"
     implementation 'org.sql2o:sql2o:1.5.4'
     implementation 'org.postgresql:postgresql:9.4-1201-jdbc41'
     implementation 'org.flywaydb:flyway-core:4.2.0'
