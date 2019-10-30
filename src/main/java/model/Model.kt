@@ -6,5 +6,5 @@ import handler.User
 
 interface Model {
     fun login(user: User): MutableList<User>
-    fun addToDo(userId: String, doneItem: DoneItem): Any
+    fun addToDo(userId: String, doneItem: DoneItem)
 }

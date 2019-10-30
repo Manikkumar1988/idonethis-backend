@@ -24,5 +24,5 @@ Then("I should be able to add a to_do item") do
 
     response = RestClient.post "#{$BASE_URL}/user/#{parsed["uid"]}/item", payload , {content_type: :json, accept: :json}
     expect(response.code).to eq(200)
-    expect(response.body).to eq("{\"code\":200,\"body\":\"Success\"}")
+    expect(response.body).to eq("{\"status\":\"success\"}")
 end

@@ -9,7 +9,7 @@ class ToDoHandler(valueClass: Model) : AbstractRequestHandler<DoneItem>(DoneItem
     override fun processImpl(value: DoneItem, urlParams: Map<String, String>): Answer {
         model.addToDo(urlParams.getOrDefault(":uid","unknown"),value)
         val gson = Gson()
-        val jsonString = gson.toJson(Answer(200,"Success"))
+        val jsonString = gson.toJson(Status("success"))
         return Answer.ok(jsonString)
     }
 
