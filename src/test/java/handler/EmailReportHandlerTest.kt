@@ -21,8 +21,8 @@ class EmailReportHandlerTest : BaseHandlerTest() {
         every { emailService.sendReport(team, "") } just runs
 
         val urlParams = mapOf(":teamId" to "1")
-        val emailRemindHandler = EmailReportHandler(model, emailService)
-        val answer = emailRemindHandler.process(EmptyPayload(), urlParams)
+        val emailReportHandler = EmailReportHandler(model, emailService)
+        val answer = emailReportHandler.process(EmptyPayload(), urlParams)
 
         assertEquals(Answer(200,"{\"status\":\"success\"}"), answer)
 

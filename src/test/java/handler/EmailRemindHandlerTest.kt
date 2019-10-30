@@ -22,7 +22,7 @@ class EmailRemindHandlerTest : BaseHandlerTest() {
         every { emailService.sendReminder(team) } just runs
 
         val urlParams = mapOf(":teamId" to "1")
-        val emailRemindHandler = EmailReportHandler(model, emailService)
+        val emailRemindHandler = EmailRemindHandler(model, emailService)
         val answer = emailRemindHandler.process(EmptyPayload(), urlParams)
 
         assertEquals(Answer(200,"{\"status\":\"success\"}"), answer)
