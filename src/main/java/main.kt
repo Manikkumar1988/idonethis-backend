@@ -1,5 +1,7 @@
 import handler.GetHandler
 import handler.LoginHandler
+import handler.TeamGetHandler
+import handler.TeamPostHandler
 import handler.ToDoHandler
 import model.Model
 import model.Sql2OModel
@@ -15,12 +17,16 @@ fun main() {
 
     val model: Model = Sql2OModel(db.sql2o)
 
-    before("/*") { q, _ -> println("Received api call: ${q.url()}") }
+    before("/*") { q, _ -> println("Received ${q.requestMethod()} call: ${q.url()}") }
+
     get("/hello", GetHandler(model))
     get("/alive") { _, _ -> "ok" }
 
     get("/user", LoginHandler(model))
     post("/user/:uid/item", ToDoHandler(model))
+
+    get("/team/:teamId", TeamGetHandler(model))
+    post("/team/:teamId", TeamPostHandler(model))
 }
 
 fun getHerokuAssignedPort(): Int {

@@ -1,12 +1,35 @@
 package model
 
 import handler.DoneItem
+import handler.Team
 import handler.User
 import org.sql2o.Sql2o
 import java.util.*
 
 
 class Sql2OModel(val sql2o: Sql2o): Model {
+    override fun getTeamMember(teamId: String): MutableList<Team> {
+        val teamList = mutableListOf<Team>()
+        sql2o.open().use { conn ->
+            val sql = """select * from team where teamid=:teamid"""
+            teamList.addAll(conn.createQuery(sql)
+                    .addParameter("teamid", teamId)
+                    .executeAndFetch(Team::class.java))
+
+        }
+        return teamList
+    }
+
+    override fun addTeamMember(teamId: String, team: Team) {
+        sql2o.open().use { conn ->
+            conn.createQuery("""insert into team (teamid, email)
+                | values(:teamid, :email) ON CONFLICT (email) DO NOTHING""".trimMargin())
+                    .addParameter("teamid", teamId)
+                    .addParameter("email", team.email)
+                    .executeUpdate()
+        }
+    }
+
     override fun addToDo(userId: String, doneItem: DoneItem) {
         sql2o.open().use { conn ->
             conn.createQuery("""insert into doneItem (uid, name, type, createdAt)
