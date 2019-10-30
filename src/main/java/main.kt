@@ -18,7 +18,6 @@ fun main() {
     before("/*") { q, _ -> println("Received api call: ${q.url()}") }
     get("/hello", GetHandler(model))
     get("/alive") { _, _ -> "ok" }
-    get("/dbcheck") { _, _ -> db.getAllUsers() }
 
     get("/user", LoginHandler(model))
     post("/user/:uid/item", ToDoHandler(model))

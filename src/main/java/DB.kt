@@ -39,9 +39,4 @@ class DB {
         flyway.migrate()
     }
 
-    fun getAllUsers(): MutableList<User> {
-        val sql = "SELECT * FROM user_devices"
-        sql2o.open().use { con -> return con.createQuery(sql).executeAndFetch(User::class.java) }
-    }
-
 }
