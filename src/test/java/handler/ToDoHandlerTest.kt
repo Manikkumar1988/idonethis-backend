@@ -11,14 +11,7 @@ import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
 
-class ToDoHandlerTest {
-    @MockK
-    lateinit var model: Model
-
-    @Before
-    fun `set up`() {
-        MockKAnnotations.init(this)
-    }
+class ToDoHandlerTest : BaseHandlerTest() {
 
     @Test
     fun `should add a todo`() {

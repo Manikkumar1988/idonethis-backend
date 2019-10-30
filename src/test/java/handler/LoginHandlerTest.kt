@@ -9,15 +9,7 @@ import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
 
-class LoginHandlerTest {
-
-    @MockK
-    lateinit var model: Model
-
-    @Before
-    fun `set up`() {
-        MockKAnnotations.init(this)
-    }
+class LoginHandlerTest : BaseHandlerTest() {
 
     @Test
     fun `should valid user `() {

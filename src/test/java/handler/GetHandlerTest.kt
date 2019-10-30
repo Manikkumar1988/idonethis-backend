@@ -9,15 +9,7 @@ import org.junit.Before
 import org.junit.Test
 import java.util.*
 
-class GetHandlerTest {
-
-    @MockK
-    lateinit var model: Model
-
-    @Before
-    fun `set up`() {
-        MockKAnnotations.init(this)
-    }
+class GetHandlerTest : BaseHandlerTest() {
 
     @Test
     fun `should return Hello World`() {
