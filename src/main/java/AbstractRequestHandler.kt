@@ -43,15 +43,4 @@ abstract class AbstractRequestHandler<V : Validable>(private val valueClass: Cla
 
     }
 
-//    fun dataToJson(data: Any): String {
-//        try {
-//            val mapper = ObjectMapper()
-//            mapper.enable(SerializationFeature.INDENT_OUTPUT)
-//            return mapper.writeValueAsString(data)
-//        } catch (e: IOException) {
-//            throw RuntimeException("IOException from a StringWriter?")
-//        }
-//
-//    }
-
 }
