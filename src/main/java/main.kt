@@ -1,3 +1,6 @@
+import email.EmailService
+import handler.EmailRemindHandler
+import handler.EmailReportHandler
 import handler.GetHandler
 import handler.LoginHandler
 import handler.TeamGetHandler
@@ -27,6 +30,10 @@ fun main() {
 
     get("/team/:teamId", TeamGetHandler(model))
     post("/team/:teamId", TeamPostHandler(model))
+
+    post("/team/:teamId/remind", EmailRemindHandler(model, EmailService()))
+    post("/team/:teamId/report", EmailReportHandler(model, EmailService()))
+
 }
 
 fun getHerokuAssignedPort(): Int {
