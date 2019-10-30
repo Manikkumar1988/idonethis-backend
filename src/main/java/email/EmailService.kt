@@ -1,10 +1,11 @@
 package email
 
 import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport
+import handler.Team
 
 
 class EmailService  {
-    fun sendReminder(recipientAddress: Array<String>) {
+    fun sendReminder(recipientAddress: MutableList<Team>) {
         val gmailService = GmailServiceImpl(GoogleNetHttpTransport.newTrustedTransport(), GmailCredentials(
                 "maniksrr@gmail.com",
                 "118306839541-92mci2f2978cjvlk2ininq0a8u4o7297.apps.googleusercontent.com",
@@ -16,7 +17,7 @@ class EmailService  {
     }
 
 
-    fun sendReport(recipientAddress: Array<String>, body: String) {
+    fun sendReport(recipientAddress: MutableList<Team>, body: String) {
         val gmailService = GmailServiceImpl(GoogleNetHttpTransport.newTrustedTransport(), GmailCredentials(
                 "maniksrr@gmail.com",
                 "118306839541-92mci2f2978cjvlk2ininq0a8u4o7297.apps.googleusercontent.com",

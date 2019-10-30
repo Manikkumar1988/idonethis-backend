@@ -1,6 +1,8 @@
 package email
 
+import handler.Team
+
 
 interface GmailService {
-    fun sendMessage(recipientAddress: Array<String>, subject: String, body: String): Boolean
+    fun sendMessage(recipientAddress: MutableList<Team>, subject: String, body: String): Boolean
 }

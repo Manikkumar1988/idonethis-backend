@@ -7,6 +7,7 @@ import com.google.api.client.json.jackson2.JacksonFactory
 import com.google.api.client.util.Base64
 import com.google.api.services.gmail.Gmail
 import com.google.api.services.gmail.model.Message
+import handler.Team
 import java.io.ByteArrayOutputStream
 import java.util.*
 import javax.mail.Session
@@ -21,7 +22,7 @@ class GmailServiceImpl(private val newTrustedTransport: NetHttpTransport, privat
 
     private val jacksonFactory = JacksonFactory.getDefaultInstance()
 
-    override fun sendMessage(recipientAddress: Array<String>, subject: String, body: String): Boolean {
+    override fun sendMessage(recipientAddress: MutableList<Team>, subject: String, body: String): Boolean {
         val message = createMessageWithEmail(
                 createEmail(recipientAddress, gmailCredentials.userEmail, subject, body))
 
@@ -39,12 +40,12 @@ class GmailServiceImpl(private val newTrustedTransport: NetHttpTransport, privat
                 .build()
     }
 
-    private fun createEmail(to: Array<String>, from: String, subject: String, bodyText: String): MimeMessage {
+    private fun createEmail(to: MutableList<Team>, from: String, subject: String, bodyText: String): MimeMessage {
         val email = MimeMessage(Session.getDefaultInstance(Properties(), null))
         email.setFrom(InternetAddress(from))
 
         for(t in to) {
-            email.addRecipients(javax.mail.Message.RecipientType.TO, t)
+            email.addRecipients(javax.mail.Message.RecipientType.TO, t.email)
         }
 
         email.subject = subject
