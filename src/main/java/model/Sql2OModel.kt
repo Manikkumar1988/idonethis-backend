@@ -1,6 +1,7 @@
 package model
 
 import handler.DoneItem
+import handler.DoneItemV1
 import handler.Team
 import handler.User
 import org.sql2o.Sql2o
@@ -40,6 +41,15 @@ class Sql2OModel(val sql2o: Sql2o): Model {
                     .addParameter("createdAt", Calendar.getInstance().timeInMillis)
                     .executeUpdate()
         }
+    }
+
+    override fun getDoneItems(): MutableList<DoneItemV1> {
+        val doneItems = mutableListOf<DoneItemV1>()
+        sql2o.open().use { conn ->
+            doneItems.addAll(conn.createQuery("""select * from doneItem""".trimMargin())
+                    .executeAndFetch(DoneItemV1::class.java))
+        }
+        return doneItems
     }
 
     override fun login(user: User): MutableList<User> {

@@ -11,7 +11,17 @@ class EmailReportHandler(valueClass: Model, private val emailService: EmailServi
 
         val teamList = model.getTeamMember(urlParams.getOrDefault(":teamId", "1"))
 
-        emailService.sendReport(teamList, "")
+        val doneItems = model.getDoneItems()
+
+        val sb = StringBuilder()
+
+        sb.append("<b>test1@gmail.com<b> has completed:")
+
+        for(doneItem in doneItems) {
+            sb.append("<li>"+doneItem.name+"</li>")
+        }
+
+        emailService.sendReport(teamList, sb.toString())
 
         val gson = Gson()
         val jsonString = gson.toJson(Status("success"))

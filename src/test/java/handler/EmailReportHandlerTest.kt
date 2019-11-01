@@ -18,7 +18,9 @@ class EmailReportHandlerTest : BaseHandlerTest() {
     fun `should call email remind with appropriate mail list`() {
         val team = mutableListOf(Team("abc@test.com","1"))
         every { model.getTeamMember("1") } returns team
-        every { emailService.sendReport(team, "") } just runs
+        every { model.getDoneItems() } returns mutableListOf<DoneItemV1>()
+
+        every { emailService.sendReport(team, any()) } just runs
 
         val urlParams = mapOf(":teamId" to "1")
         val emailReportHandler = EmailReportHandler(model, emailService)
@@ -26,7 +28,7 @@ class EmailReportHandlerTest : BaseHandlerTest() {
 
         assertEquals(Answer(200,"{\"status\":\"success\"}"), answer)
 
-        verify { emailService.sendReport(team, "") }
+        verify { emailService.sendReport(team, any()) }
         verify { model.getTeamMember("1") }
     }
 }
